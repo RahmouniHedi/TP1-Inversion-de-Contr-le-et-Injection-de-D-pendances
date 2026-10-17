@@ -1,10 +1,5 @@
 # TP1 : Inversion de Contrôle (IoC) et Injection de Dépendances (DI)
 
-* **Établissement :** Faculté des Sciences de Sfax (FSS) - Département d'Informatique et des Communications
-* **Année Universitaire :** 2026-2027
-* **Matière :** Architecture MicroServices
-* **Filière :** MPSRCC1
-* **Enseignantes :** Mme Corinne Amel ZAYANI, Mme Amal ABID
 
 ---
 
