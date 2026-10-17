@@ -14,11 +14,10 @@ Ce travail pratique a pour objectif de :
 ## 2. Architecture et Structure du Projet
 
 L'application respecte une architecture en couches séparant l'accès aux données (`dao`), la logique métier (`metier`) et la couche de présentation (`presentation`).
-
-![Structure du projet Maven dans IntelliJ IDEA]("C:\Users\rahmo\OneDrive\Pictures\Screenshots 1\structure_projet.png")
+![Structure du projet Maven dans IntelliJ IDEA](screenshots/structure_projet.png)
 *Figure 1 : Arborescence globale du projet Maven `TP1` sous IntelliJ IDEA (packages `dao`, `metier`, `presentation`, fichier `config.txt`, fichier `config.xml` et `pom.xml`).*
 
-![Implémentation des couches DAO et Métier]("C:\Users\rahmo\OneDrive\Pictures\Screenshots 1\dao_metier_code.png")
+![Implémentation des couches DAO et Métier](screenshots/dao_metier_code.png)
 *Figure 2 : Implémentation des interfaces `IDao` / `IMetier` et des classes `DaoIMP` / `MetierIMP` illustrant l'association via l'interface `IDao`.*
 
 ---
@@ -28,7 +27,7 @@ L'application respecte une architecture en couches séparant l'accès aux donné
 ### Exécution et Résultat
 Dans cette première activité, la classe `PresentationStatique` instancie directement `DaoIMP` et `MetierIMP` avec l'opérateur `new`, puis injecte l'objet `dao` dans `metier` via le setter `metier.setDao(dao)`.
 
-![Exécution de PresentationStatique]("C:\Users\rahmo\OneDrive\Pictures\Screenshots 1\exec_statique.png")
+![Exécution de PresentationStatique](screenshots/exec_statique.png)
 *Figure 3 : Code source et résultat d'exécution de la classe `PresentationStatique` dans la console IntelliJ IDEA.*
 
 ### Réponses aux questions (Activité 1-1)
@@ -50,7 +49,7 @@ Il faut supprimer l'utilisation de l'opérateur `new` des classes concrètes dan
 ### Exécution et Résultat
 Dans cette activité, les noms des classes concrètes (`dao.DaoIMP` et `metier.MetierIMP`) sont lus depuis le fichier `config.txt` et chargés dynamiquement en mémoire via l'API de réflexion Java (`Class.forName()`).
 
-![Exécution de PresentationDynamique]("C:\Users\rahmo\OneDrive\Pictures\Screenshots 1\exec_dynamique.png")
+![Exécution de PresentationDynamique](screenshots/exec_dynamique.png)
 *Figure 4 : Contenu du fichier `config.txt`, code de `PresentationDynamique` utilisant `Class.forName`, et résultat d'exécution.*
 
 ### Réponses aux questions (Activité 1-2)
@@ -63,12 +62,12 @@ Contrairement à l'activité 1-1 où le choix des implémentations était figé 
 
 **9. Quels sont les avantages et les limites de cette solution ?**
 * **Avantages :**
-    * Découplage total du code source vis-à-vis des classes concrètes.
-    * Évolutivité : changement d'implémentation à chaud via `config.txt` sans recompilation.
+  * Découplage total du code source vis-à-vis des classes concrètes.
+  * Évolutivité : changement d'implémentation à chaud via `config.txt` sans recompilation.
 * **Limites :**
-    * Le développeur doit toujours écrire manuellement le code technique de lecture du fichier, d'instanciation par réflexion et d'invocation des setters (code répétitif et verbeux).
-    * Gestion complexe si l'application comporte des dizaines de classes avec un graphe de dépendances profond.
-    * Absence de vérification à la compilation (risque de `ClassNotFoundException`, `NoSuchMethodException` à l'exécution) et absence de gestion avancée du cycle de vie des objets (scopes Singleton/Prototype, etc.).
+  * Le développeur doit toujours écrire manuellement le code technique de lecture du fichier, d'instanciation par réflexion et d'invocation des setters (code répétitif et verbeux).
+  * Gestion complexe si l'application comporte des dizaines de classes avec un graphe de dépendances profond.
+  * Absence de vérification à la compilation (risque de `ClassNotFoundException`, `NoSuchMethodException` à l'exécution) et absence de gestion avancée du cycle de vie des objets (scopes Singleton/Prototype, etc.).
 
 ---
 
@@ -77,7 +76,7 @@ Contrairement à l'activité 1-1 où le choix des implémentations était figé 
 ### Exécution et Résultat
 Le fichier `config.xml` déclare les beans `dao` et `metier` ainsi que leur liaison (`<property name="dao" ref="dao"/>`). La classe `PresentationAvecSpring` démarre le conteneur Spring via `ClassPathXmlApplicationContext`.
 
-![Exécution de PresentationAvecSpring avec XML]("C:\Users\rahmo\OneDrive\Pictures\Screenshots 1\exec_spring_xml.png")
+![Exécution de PresentationAvecSpring avec XML](screenshots/exec_spring_xml.png)
 *Figure 5 : Configuration des beans dans `config.xml` et exécution de la classe `PresentationAvecSpring`.*
 
 ### Réponses aux questions (Activité 1-3)
@@ -100,7 +99,7 @@ Dans l'activité 1-2, le développeur devait coder lui-même la mécanique de r�
 ### Exécution et Résultat
 Les classes `DaoIMP` et `MetierIMP` sont annotées respectivement avec `@Repository` et `@Service`, et la dépendance est injectée via `@Autowired`. La classe `PresentationAvecAnnotation` utilise `AnnotationConfigApplicationContext("dao", "metier")` pour scanner les packages.
 
-![Exécution de PresentationAvecAnnotation]("C:\Users\rahmo\OneDrive\Pictures\Screenshots 1\exec_spring_annotation.png")
+![Exécution de PresentationAvecAnnotation](screenshots/exec_spring_annotation.png)
 *Figure 6 : Utilisation des annotations `@Repository`, `@Service`, `@Autowired` et exécution de `PresentationAvecAnnotation`.*
 
 ### Réponses aux questions (Activité 1-4)
